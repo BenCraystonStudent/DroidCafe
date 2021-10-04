@@ -1,5 +1,6 @@
 package com.example.droidcafe;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -17,6 +18,7 @@ import com.example.droidcafe.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,5 +75,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message,
+                Toast.LENGTH_SHORT).show();
+    }
+
+    public void showDonutOrder(View view) {
+        displayToast(getString(R.string.donut_order_message));
+    }
+
+    /**
+     * Shows a message that the ice cream sandwich image was clicked.
+     */
+    public void showIceCreamOrder(View view) {
+        displayToast(getString(R.string.ice_cream_order_message));
+    }
+
+    /**
+     * Shows a message that the froyo image was clicked.
+     */
+    public void showFroyoOrder(View view) {
+        displayToast(getString(R.string.froyo_order_message));
     }
 }
